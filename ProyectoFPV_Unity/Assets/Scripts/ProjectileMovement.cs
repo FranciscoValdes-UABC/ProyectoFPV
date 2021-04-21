@@ -5,6 +5,7 @@ using UnityEngine;
 public class ProjectileMovement : MonoBehaviour
 {
     public float speed;
+    public float gravedad;
     public CampoGravitatorio[] camposGravitatorios;
 
     //Este representa la posicion en valores polares
@@ -38,8 +39,8 @@ public class ProjectileMovement : MonoBehaviour
                 {
                     center = campo.transform;
                     dentro = 1;
-                    pos.x = Mathf.Sqrt(Mathf.Pow(transform.position.x, 2) + Mathf.Pow(transform.position.y, 2));
-                    pos.y = Mathf.Atan(transform.position.x / transform.position.y);
+                    pos.x = Mathf.Sqrt(Mathf.Pow((transform.position.x - center.position.x), 2) + Mathf.Pow((transform.position.y - center.position.y), 2));
+                    pos.y = Mathf.Atan2((transform.position.x - center.position.x) , (transform.position.y - center.position.y));
                 }
             }
 
@@ -55,9 +56,8 @@ public class ProjectileMovement : MonoBehaviour
                 //Conversion cartesianas a polares
                 print("Dentro: X: " + transform.position.x + "Y: " + transform.position.y);
                 GeneralPolarMovement();
-            } else{
-
-                
+            } 
+            else{
                 transform.position = new Vector2(transform.position.x + Time.deltaTime * (speed) * Input.GetAxis("Horizontal"), transform.position.y + Time.deltaTime * (speed) * Input.GetAxis("Vertical"));
                 print("Fuera: X: " + transform.position.x + "Y: " + transform.position.y);
             }
@@ -81,6 +81,8 @@ public class ProjectileMovement : MonoBehaviour
         //Tengo que aumentar el valor del radio, en este caso sera el valor representado por "x" dentro del vector
         pos.y += Time.deltaTime * (speed) * Input.GetAxis("Horizontal");
         pos.x += Time.deltaTime * (speed) * Input.GetAxis("Vertical");
+        //pos.x += Time.deltaTime * (speed) - (center.GetComponent<CampoGravitatorio>().gravedad * 0.01f);
+
         //Despues de aumentar dicho angulo aplico la funcion de coordenadas polares
         transform.position = (Vector2)center.position + new Vector2(pos.x * Mathf.Sin(pos.y), pos.x * Mathf.Cos(pos.y));
     }

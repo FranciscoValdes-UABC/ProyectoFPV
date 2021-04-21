@@ -8,6 +8,7 @@ public class CampoGravitatorio : MonoBehaviour
     //Contenera un  valor flotante que simularan el radio del circulo
 
     public float size;
+    public float gravedad;
 
     void OnDrawGizmosSelected()
     {
