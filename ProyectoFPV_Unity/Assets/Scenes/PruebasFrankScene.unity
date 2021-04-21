@@ -373,6 +373,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
+  gravedad: 0
   camposGravitatorios: []
 --- !u!1 &764789270
 GameObject:
@@ -566,4 +567,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: 5
-  gravedad: 1
+  gravedad: 2
