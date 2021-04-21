@@ -9,16 +9,17 @@ public class PolarMovement : MonoBehaviour
     private Vector2 pos;
 
 
-
-    // Start is called before the first frame update
+   
     void Start()
     {
         pos = transform.position;
     }
 
-    // Update is called once per frame
     void Update()
     {
+        //Aqui verificamos si el usuario esta haciendo algun input (ya sea horizontal o vertical), si es asi entonces
+        //se manda a la funcion correspondiente el signo del movimiento (Esto puede ser interpretado como si el jugador se quiere mover
+        //hacia enfrente o hacia atras)
         if (Input.GetAxisRaw("Horizontal") != 0)
         {
             horizontalPolarMovement((int)Mathf.Sign(Input.GetAxis("Horizontal")));
@@ -29,15 +30,16 @@ public class PolarMovement : MonoBehaviour
         }
     }
 
-    void horizontalPolarMovement(int sign)
-    {
+    //Esta funcion se encarga del movimiento "Horizontal", como este se hace de forma diferente que el movimiento vertical decidi hacerlo en dos funciones.
+    void horizontalPolarMovement(int sign){
 
+        //Esta parte del codigo se encarga de hacer que la rotacion del objeto concorde con su posicion relativa al centro.
+        //Primero se obtiene el vector de direccion que apunte del objeto al centro
         Vector3 targetDirection = center.position - transform.position;
+        //Como el juego es 2D la z se descarta
         targetDirection.z = 0;
-        Vector3 rotatedVectorToTarget = Quaternion.Euler(0, 0, 180) * targetDirection;
-        transform.rotation = Quaternion.LookRotation(forward: Vector3.forward, upwards: rotatedVectorToTarget);
-
-
+        //Se aplica la rotacion con la funcion  Quaternion.LookRotation
+        transform.rotation = Quaternion.LookRotation(targetDirection);
 
         //pos.x += Time.deltaTime;
         pos.y += Time.deltaTime * (speed * sign);
