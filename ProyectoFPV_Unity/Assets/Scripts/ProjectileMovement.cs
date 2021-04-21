@@ -42,13 +42,11 @@ public class ProjectileMovement : MonoBehaviour
                     pos.y = Mathf.Atan(transform.position.x / transform.position.y);
                 }
             }
-        }
-        else if(Vector2.Distance(center.transform.position, transform.position) > center.GetComponent<CampoGravitatorio>().size)
-        {
-            dentro = 0;
-            transform.position = (Vector2)center.position + new Vector2(pos.x * Mathf.Sin(pos.y), pos.x * Mathf.Cos(pos.y));
-        }
 
+        }else if (Vector2.Distance(center.transform.position, transform.position) > center.GetComponent<CampoGravitatorio>().size){
+                dentro = 0;
+                transform.position = (Vector2)center.position + new Vector2(pos.x * Mathf.Sin(pos.y), pos.x * Mathf.Cos(pos.y));          
+        }
 
         if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
         {
@@ -57,12 +55,10 @@ public class ProjectileMovement : MonoBehaviour
                 //Conversion cartesianas a polares
                 print("Dentro: X: " + transform.position.x + "Y: " + transform.position.y);
                 GeneralPolarMovement();
-            }
-            else
-            {
-                pos.x += Time.deltaTime * (speed) * Input.GetAxis("Horizontal");
-                pos.y += Time.deltaTime * (speed) * Input.GetAxis("Vertical");
-                transform.position = pos;
+            } else{
+
+                
+                transform.position = new Vector2(transform.position.x + Time.deltaTime * (speed) * Input.GetAxis("Horizontal"), transform.position.y + Time.deltaTime * (speed) * Input.GetAxis("Vertical"));
                 print("Fuera: X: " + transform.position.x + "Y: " + transform.position.y);
             }
         }
