@@ -80,8 +80,8 @@ public class ProjectileMovement : MonoBehaviour
         //Ademas para poder moverme "Verticalmente" respecto del centro
         //Tengo que aumentar el valor del radio, en este caso sera el valor representado por "x" dentro del vector
         pos.y += Time.deltaTime * (speed) * Input.GetAxis("Horizontal");
-        pos.x += Time.deltaTime * (speed) * Input.GetAxis("Vertical");
-        //pos.x += Time.deltaTime * (speed) - (center.GetComponent<CampoGravitatorio>().gravedad * 0.01f);
+        //pos.x += Time.deltaTime * (speed) * Input.GetAxis("Vertical");
+        pos.x += Time.deltaTime * (speed) - (center.GetComponent<CampoGravitatorio>().gravedad * 0.01f);
 
         //Despues de aumentar dicho angulo aplico la funcion de coordenadas polares
         transform.position = (Vector2)center.position + new Vector2(pos.x * Mathf.Sin(pos.y), pos.x * Mathf.Cos(pos.y));
