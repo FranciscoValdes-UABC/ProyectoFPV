@@ -33,13 +33,8 @@ public class PolarMovement : MonoBehaviour
     void GeneralPolarMovement()
     {
 
-        //Esta parte del codigo se encarga de hacer que la rotacion del objeto concorde con su posicion relativa al centro.
-        //Primero se obtiene el vector de direccion que apunte del objeto al centro
-        Vector3 targetDirection = center.position - transform.position;
-        //Como el juego es 2D la z se descarta
-        targetDirection.z = 0;
-        //Se aplica la rotacion con la funcion  Quaternion.LookRotation
-        transform.rotation = Quaternion.LookRotation(targetDirection);
+        transform.right = center.position - transform.position;
+
 
         //Como los valores de la variable "pos" representan el vector en coordenadas polares, para poder moverme "Horizontalmente" alrededor del centro
         //Tengo que aumentar el valor del angulo, en este caso sera el valor representado por "y" dentro del vector

@@ -54,12 +54,10 @@ public class ProjectileMovement : MonoBehaviour
             if(dentro == 1)
             {
                 //Conversion cartesianas a polares
-                print("Dentro: X: " + transform.position.x + "Y: " + transform.position.y);
                 GeneralPolarMovement();
             } 
             else{
                 transform.position = new Vector2(transform.position.x + Time.deltaTime * (speed) * Input.GetAxis("Horizontal"), transform.position.y + Time.deltaTime * (speed) * Input.GetAxis("Vertical"));
-                print("Fuera: X: " + transform.position.x + "Y: " + transform.position.y);
             }
         }
     }
@@ -67,13 +65,8 @@ public class ProjectileMovement : MonoBehaviour
     //Esta funcion se encarga del movimiento en general.
     void GeneralPolarMovement()
     {
-        //Esta parte del codigo se encarga de hacer que la rotacion del objeto concorde con su posicion relativa al centro.
-        //Primero se obtiene el vector de direccion que apunte del objeto al centro
-        Vector3 targetDirection = center.position - transform.position;
-        //Como el juego es 2D la z se descarta
-        targetDirection.z = 0;
-        //Se aplica la rotacion con la funcion  Quaternion.LookRotation
-        transform.rotation = Quaternion.LookRotation(targetDirection);
+
+        transform.right = transform.position - center.position  ;
 
         //Como los valores de la variable "pos" representan el vector en coordenadas polares, para poder moverme "Horizontalmente" alrededor del centro
         //Tengo que aumentar el valor del angulo, en este caso sera el valor representado por "y" dentro del vector
