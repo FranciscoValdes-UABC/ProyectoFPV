@@ -7,9 +7,6 @@ public class ProjectileMovement1 : MonoBehaviour
     public float speed;
     public CampoGravitatorio[] camposGravitatorios;
 
-    //Este representa la posicion en valores polares
-    private Vector2 pos;
-
     public float Vo;
     public float Angulo;
     public float g;
@@ -17,6 +14,7 @@ public class ProjectileMovement1 : MonoBehaviour
     Vector2 P;
     Vector2 V;
     Vector2 A;
+    float F;
 
     //Esta variable será el centro cuando se confirme que está en un planeta
     private Transform center;
@@ -61,8 +59,8 @@ public class ProjectileMovement1 : MonoBehaviour
         if (dentro == 1)
         {
             //Conversion cartesianas a polares
-            print("Dentro: X: " + transform.position.x + "Y: " + transform.position.y);
-            print("Velocidad X: " + V.x + " Y: " + V.y);
+            /*print("Dentro: X: " + transform.position.x + "Y: " + transform.position.y);
+            print("Velocidad X: " + V.x + " Y: " + V.y);*/
             PlanetMovement();
         }
         else
@@ -71,16 +69,18 @@ public class ProjectileMovement1 : MonoBehaviour
             P.x = P.x + V.x * Time.deltaTime;
             P.y = P.y + V.y * Time.deltaTime - 0.5f*g*Mathf.Pow(Time.deltaTime, 2);
             transform.position = P;
-            print("Fuera: X: " + transform.position.x + "Y: " + transform.position.y);
-            print("Velocidad X: " + V.x + " Y: " + V.y);
+            /*print("Fuera: X: " + transform.position.x + "Y: " + transform.position.y);
+            print("Velocidad X: " + V.x + " Y: " + V.y);*/
         }
     }
 
     //Esta funcion se encarga del movimiento en general.
     void PlanetMovement()
     {
-        A = (center.position - transform.position).normalized;
-        V += (g * A * peso) * Time.deltaTime;
+        A = (center.position - transform.position);
+        F = g*((transform.localScale.x*center.localScale.x*60)/Mathf.Pow(A.magnitude, 2));
+        print(F);
+        V += (F * A.normalized * peso) * Time.deltaTime;
         Vector3 v3 = V;
         transform.position += v3 * Time.deltaTime;
     }
