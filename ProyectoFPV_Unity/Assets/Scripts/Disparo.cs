@@ -22,7 +22,7 @@ public class Disparo : MonoBehaviour
             if(Vo != 0){
                 ProjectileMovement1 pro = Instantiate(projectile, transform.position, transform.rotation) as ProjectileMovement1;
                 pro.Vo = Vo;
-                pro.Angulo = (Angulo * Mathf.PI) / 180;
+                pro.Angulo = (((Angulo + transform.eulerAngles.z) * Mathf.PI) / 180);
             }
         }
         if (Input.GetAxisRaw("Horizontal") != 0)

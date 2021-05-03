@@ -15,6 +15,7 @@ public class ProjectileMovement1 : MonoBehaviour
     Vector2 V;
     Vector2 A;
     float F;
+    float time;
 
     //Esta variable será el centro cuando se confirme que está en un planeta
     private Transform center;
@@ -34,6 +35,7 @@ public class ProjectileMovement1 : MonoBehaviour
 
     void Update()
     {
+        time += Time.deltaTime;
         if (dentro == 0)
         {
             foreach (CampoGravitatorio campo in camposGravitatorios)
@@ -72,6 +74,7 @@ public class ProjectileMovement1 : MonoBehaviour
             /*print("Fuera: X: " + transform.position.x + "Y: " + transform.position.y);
             print("Velocidad X: " + V.x + " Y: " + V.y);*/
         }
+        Destroy(gameObject, 60);
     }
 
     //Esta funcion se encarga del movimiento en general.
@@ -79,7 +82,6 @@ public class ProjectileMovement1 : MonoBehaviour
     {
         A = (center.position - transform.position);
         F = g*((transform.localScale.x*center.localScale.x*60)/Mathf.Pow(A.magnitude, 2));
-        print(F);
         V += (F * A.normalized * peso) * Time.deltaTime;
         Vector3 v3 = V;
         transform.position += v3 * Time.deltaTime;
