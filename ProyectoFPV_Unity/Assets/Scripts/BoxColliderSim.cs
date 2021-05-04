@@ -14,7 +14,9 @@ public class BoxColliderSim : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
+        Matrix4x4 rotationMatrix = Matrix4x4.TRS(transform.position, transform.rotation, transform.lossyScale);
+        Gizmos.matrix = rotationMatrix;
         Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(transform.position, new Vector3(sizes[0], sizes[1], 0));
+        Gizmos.DrawWireCube(Vector3.zero, new Vector3(sizes[0], sizes[1], 0));
     }
 }
