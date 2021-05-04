@@ -8,8 +8,8 @@ public class ColliderController : MonoBehaviour
     public List<BoxColliderSim> Boxes;
     public List<CircleColliderSim> Circles;
 
-    public Vector2 pos1;
-    public Vector2 pos2;
+    //Se ignoraran las colisiones que ocurran entre los objetos que tengan las tags contenidas en esta lista
+    public List<string> TagsToExclude;
 
     void Start()
     {
@@ -32,18 +32,22 @@ public class ColliderController : MonoBehaviour
     void Update()
     {
         //Esto revisa si existen colisiones entre circulos y rectangulos
-        foreach (BoxColliderSim i in Boxes)
+        foreach ( CircleColliderSim j in Circles)
         {
-            foreach (CircleColliderSim j in Circles)
-            {
+            foreach (BoxColliderSim i in Boxes){
 
-            
-
-                pos1 = i.transform.TransformPoint(new Vector3( - (i.sizes[0] / 2),  - (i.sizes[1] / 2),0));
-                pos2 = i.transform.TransformPoint(new Vector3( + (i.sizes[0] / 2),  + (i.sizes[1] / 2),0));
+                //Esto sirve para excluir las colisiones de los objetos que contengan los tags definidos anteriormente
+                bool excluir = false;
+                foreach (string h in TagsToExclude){
+                    foreach (string k in TagsToExclude){
+                        if(i.gameObject.tag == h && j.gameObject.tag == k){
+                            excluir = true;                
+                        }
+                    }
+                }
+                if (excluir) { continue; }
 
                 //Como el cuadrado puede rotar tal vez sea mejor tomar las coordenadas del cuadrado como las del origen
-
                 Vector2 C = i.transform.InverseTransformPoint(new Vector3(j.transform.position.x, j.transform.position.y));
 
                 //Encuentra los valores de el punto mas cercano del cuadrado al circulo.
@@ -58,16 +62,36 @@ public class ColliderController : MonoBehaviour
                 if ((Dx * Dx + Dy * Dy) <= j.size * j.size)
                 {
                     print("Colision!");
+                    //Esta funcion busca, en todos los scripts que hereden de MonoBehaviour dentro de el objeto, una funcion con el
+                    //nombre "OnCollision" le manda como argumento el objeto con el que colisiono y el ultimo argumento indica que no
+                    //importa si no encuentra ninguna funcion con ese nombre
+                    j.gameObject.SendMessage("OnCollision", i.gameObject, SendMessageOptions.DontRequireReceiver);
+                    i.gameObject.SendMessage("OnCollision", j.gameObject, SendMessageOptions.DontRequireReceiver);
+                }
+            }
+
+            //Detecta colision entre circulos
+            foreach (CircleColliderSim i in Circles)
+            {
+                float Dx = j.transform.position.x - i.transform.position.x;
+                float Dy = j.transform.position.y - i.transform.position.y;
+                float D = Mathf.Sqrt(Dx * Dx + Dy * Dy);
+
+                if (i == j) {
+                    continue;
+                }
+
+                //Si la distancia entre los centros de los circulos es mayor al radio de cualquiera de los dos entonces existe una colision
+                if (D <= j.size + i.size)
+                {
+                    print("Circle Colision!");
+                    //Esta funcion busca, en todos los scripts que hereden de MonoBehaviour dentro de el objeto, una funcion con el
+                    //nombre "OnCollision" le manda como argumento el objeto con el que colisiono y el ultimo argumento indica que no
+                    //importa si no encuentra ninguna funcion con ese nombre
+                    j.gameObject.SendMessage("OnCollision", i.gameObject, SendMessageOptions.DontRequireReceiver);
+                    i.gameObject.SendMessage("OnCollision", j.gameObject, SendMessageOptions.DontRequireReceiver);
                 }
             }
         }
-    }
-
-    void OnDrawGizmos()
-    {
-        // Draw a yellow sphere at the transform's position
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(pos1, .1f);
-        Gizmos.DrawSphere(pos2, .1f);
     }
 }

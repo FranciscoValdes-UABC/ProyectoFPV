@@ -158,8 +158,9 @@ MonoBehaviour:
   - {fileID: 379549836}
   Boxes: []
   Circles: []
-  pos1: {x: 0, y: 0}
-  pos2: {x: 0, y: 0}
+  TagsToExclude:
+  - Planet
+  - Player
 --- !u!4 &369666279
 Transform:
   m_ObjectHideFlags: 0
@@ -278,7 +279,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 379549836}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.82, y: 0, z: 0}
+  m_LocalPosition: {x: 10.02, y: 0, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
@@ -300,7 +301,7 @@ GameObject:
   - component: {fileID: 529542635}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -510,7 +511,7 @@ GameObject:
   - component: {fileID: 1906503863}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: Planet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
