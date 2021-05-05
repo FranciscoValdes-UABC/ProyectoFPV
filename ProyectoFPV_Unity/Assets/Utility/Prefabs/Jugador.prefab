@@ -98,6 +98,8 @@ MonoBehaviour:
   projectile: {fileID: 1650812934752342491, guid: 1b6731aac749414449de65902589a0ee, type: 3}
   Vo: 10
   Angulo: 0
+  SpeedOfChangeVelocity: 5
+  SpeedOfChangeAngle: 5
 --- !u!114 &7292957463027252849
 MonoBehaviour:
   m_ObjectHideFlags: 0

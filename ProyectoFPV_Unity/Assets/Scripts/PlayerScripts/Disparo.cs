@@ -9,6 +9,9 @@ public class Disparo : MonoBehaviour
     public float Angulo;
     private ColliderController colliderController;
 
+    public float SpeedOfChangeVelocity;
+    public float SpeedOfChangeAngle;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,13 +30,16 @@ public class Disparo : MonoBehaviour
                 pro.Angulo = (((Angulo + transform.eulerAngles.z) * Mathf.PI) / 180);
             }
         }
-        if (Input.GetAxisRaw("Horizontal") != 0)
+        if (Input.GetKey(KeyCode.E))
         {
-            Vo = Vo + Input.GetAxisRaw("Horizontal")/10;
+            Vo = Vo + SpeedOfChangeVelocity * Time.deltaTime;
+        } else if (Input.GetKey(KeyCode.Q))
+        {
+            Vo = Vo - SpeedOfChangeVelocity * Time.deltaTime;
         }
         if (Input.GetAxisRaw("Vertical") != 0)
         {
-            Angulo = Angulo + Input.GetAxisRaw("Vertical") / 10;
+            Angulo = Angulo + Input.GetAxisRaw("Vertical") * SpeedOfChangeAngle * Time.deltaTime ;
         }
     }
 }
