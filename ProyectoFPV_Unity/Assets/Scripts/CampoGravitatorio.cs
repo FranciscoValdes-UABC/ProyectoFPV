@@ -9,10 +9,18 @@ public class CampoGravitatorio : MonoBehaviour
 
     public float size;
     public float gravedad;
+    public GameObject campo;
 
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, size);
+        
+    }
+
+    void Start()
+    {
+        GameObject pro = Instantiate(campo, transform.position, transform.rotation) as GameObject;
+        pro.transform.localScale = new Vector3(size * 2, size * 2, size * 2);
     }
 }
