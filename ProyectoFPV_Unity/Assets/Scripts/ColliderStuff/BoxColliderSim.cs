@@ -11,6 +11,11 @@ public class BoxColliderSim : MonoBehaviour
 
     public float[] sizes = new float[2];
 
+    void Start()
+    {
+        sizes[0] = this.transform.localScale.x;
+        sizes[1] = this.transform.localScale.y;
+    }
 
     void OnDrawGizmosSelected()
     {

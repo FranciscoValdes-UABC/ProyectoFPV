@@ -32,10 +32,10 @@ public class ColliderController : MonoBehaviour
     void Update()
     {
         Circles.RemoveAll(item => item == null);
+        Boxes.RemoveAll(item => item == null);
         //Esto revisa si existen colisiones entre circulos y rectangulos
         foreach ( CircleColliderSim j in Circles)
         {
-                   
 
             foreach (BoxColliderSim i in Boxes){
 
@@ -47,6 +47,14 @@ public class ColliderController : MonoBehaviour
                             excluir = true;                
                         }
                     }
+                }
+                if (j.tag == "ProjectPla1" && i.tag == "Player1")
+                {
+                    excluir = true;
+                }
+                else if (j.tag == "ProjectPla2" && i.tag == "Player2")
+                {
+                    excluir = true;
                 }
                 if (excluir) { continue; }
 

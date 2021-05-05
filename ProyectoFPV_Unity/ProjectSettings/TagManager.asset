@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Planet
+  - Player1
+  - Player2
+  - ProjectPla1
+  - ProjectPla2
   layers:
   - Default
   - TransparentFX

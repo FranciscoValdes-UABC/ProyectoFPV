@@ -18,9 +18,7 @@ public class PolarMovement : MonoBehaviour
 
     void Update()
     {
- 
              GeneralPolarMovement();
- 
     }
 
     //Esta funcion se encarga del movimiento en general.
@@ -39,5 +37,17 @@ public class PolarMovement : MonoBehaviour
 
         //Despues de aumentar dicho angulo aplico la funcion de coordenadas polares
         transform.position = (Vector2)planetaCentro.position + new Vector2(pos.x * Mathf.Sin(pos.y), pos.x * Mathf.Cos(pos.y));
+    }
+
+    public void OnCollision(GameObject coll)
+    {
+        if(coll.tag == "ProjectPla2" && this.tag == "Player1")
+        {
+            Destroy(this.gameObject);
+        }
+        else if(coll.tag == "ProjectPla1" && this.tag == "Player2")
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
