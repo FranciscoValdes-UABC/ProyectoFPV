@@ -31,9 +31,12 @@ public class ColliderController : MonoBehaviour
 
     void Update()
     {
+        Circles.RemoveAll(item => item == null);
         //Esto revisa si existen colisiones entre circulos y rectangulos
         foreach ( CircleColliderSim j in Circles)
         {
+                   
+
             foreach (BoxColliderSim i in Boxes){
 
                 //Esto sirve para excluir las colisiones de los objetos que contengan los tags definidos anteriormente

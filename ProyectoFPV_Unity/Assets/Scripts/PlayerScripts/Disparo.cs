@@ -7,11 +7,12 @@ public class Disparo : MonoBehaviour
     public ProjectileMovement1 projectile;
     public float Vo;
     public float Angulo;
+    private ColliderController colliderController;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        colliderController = FindObjectOfType<ColliderController>();
     }
 
     // Update is called once per frame
@@ -21,6 +22,7 @@ public class Disparo : MonoBehaviour
         {
             if(Vo != 0){
                 ProjectileMovement1 pro = Instantiate(projectile, transform.position, transform.rotation) as ProjectileMovement1;
+                colliderController.Circles.Add(pro.GetComponent<CircleColliderSim>());
                 pro.Vo = Vo;
                 pro.Angulo = (((Angulo + transform.eulerAngles.z) * Mathf.PI) / 180);
             }

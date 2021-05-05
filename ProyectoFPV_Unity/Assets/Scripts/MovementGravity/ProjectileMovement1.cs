@@ -86,4 +86,9 @@ public class ProjectileMovement1 : MonoBehaviour
         Vector3 v3 = V;
         transform.position += v3 * Time.deltaTime;
     }
+
+    public void OnCollision(GameObject coll)
+    {
+        Destroy(this.gameObject);
+    }
 }
