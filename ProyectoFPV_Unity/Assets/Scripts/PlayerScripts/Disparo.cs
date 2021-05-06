@@ -29,12 +29,10 @@ public class Disparo : MonoBehaviour
                 colliderController.Circles.Add(pro.GetComponent<CircleColliderSim>());
                 pro.Vo = Vo;
                 pro.Angulo = (((Angulo + transform.eulerAngles.z) * Mathf.PI) / 180);
-                if(this.tag == "Player1")
-                {
+
+                if (this.tag == "Player1"){
                     pro.tag = "ProjectPla1";
-                }
-                else
-                {
+                } else {
                     pro.tag = "ProjectPla2";
                 }
             }

@@ -20,7 +20,8 @@ public class CampoGravitatorio : MonoBehaviour
 
     void Start()
     {
-        GameObject pro = Instantiate(campo, transform.position, transform.rotation) as GameObject;
+        GameObject pro = Instantiate(campo, transform.position, Quaternion.Euler(90,90,90)) as GameObject;      
         pro.transform.localScale = new Vector3(size * 2, size * 2, size * 2);
+        pro.transform.parent = transform;
     }
 }

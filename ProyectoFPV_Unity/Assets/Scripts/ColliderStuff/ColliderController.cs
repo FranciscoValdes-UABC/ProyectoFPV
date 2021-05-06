@@ -8,8 +8,11 @@ public class ColliderController : MonoBehaviour
     public List<BoxColliderSim> Boxes;
     public List<CircleColliderSim> Circles;
 
-    //Se ignoraran las colisiones que ocurran entre los objetos que tengan las tags contenidas en esta lista
-    public List<string> TagsToExclude;
+    //Se ignoraran las colisiones que ocurran entre los objetos que tengan las tags contenidas en estas listas
+    //El sistema funciona como pares, los tags que tengan el mismo indice en las listas se excluiran entre ellos
+    //Para esto las listas siempre tendran que ser del mismo tamaño
+    public List<string> TagsToExcludeP1;
+    public List<string> TagsToExcludeP2;
 
     void Start()
     {
@@ -41,21 +44,15 @@ public class ColliderController : MonoBehaviour
 
                 //Esto sirve para excluir las colisiones de los objetos que contengan los tags definidos anteriormente
                 bool excluir = false;
-                foreach (string h in TagsToExclude){
-                    foreach (string k in TagsToExclude){
-                        if(i.gameObject.tag == h && j.gameObject.tag == k){
-                            excluir = true;                
-                        }
+                for (int h = 0; h < TagsToExcludeP1.Count; h++){
+                    if(i.gameObject.tag == TagsToExcludeP1[h] && j.gameObject.tag == TagsToExcludeP2[h]){
+                        excluir = true;                
+                    } else if (i.gameObject.tag == TagsToExcludeP2[h] && j.gameObject.tag == TagsToExcludeP1[h])
+                    {
+                        excluir = true;
                     }
                 }
-                if (j.tag == "ProjectPla1" && i.tag == "Player1")
-                {
-                    excluir = true;
-                }
-                else if (j.tag == "ProjectPla2" && i.tag == "Player2")
-                {
-                    excluir = true;
-                }
+ 
                 if (excluir) { continue; }
 
                 //Como el cuadrado puede rotar tal vez sea mejor tomar las coordenadas del cuadrado como las del origen

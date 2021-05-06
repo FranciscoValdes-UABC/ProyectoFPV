@@ -104,8 +104,8 @@ GameObject:
   - component: {fileID: 1650812934752342487}
   - component: {fileID: 1650812934752342486}
   - component: {fileID: 1650812934752342489}
-  - component: {fileID: 1650812934752342491}
   - component: {fileID: 1173636985956941562}
+  - component: {fileID: 1650812934752342491}
   - component: {fileID: -9176754429654356131}
   m_Layer: 0
   m_Name: Projectile
@@ -178,6 +178,23 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1173636985956941562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650812934752342490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 89cd9d0182708d04397eedb36887e8c2, type: 2}
 --- !u!114 &1650812934752342491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,23 +213,6 @@ MonoBehaviour:
   Angulo: 0
   g: 0
   peso: 0
---- !u!114 &1173636985956941562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1650812934752342490}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isGlobal: 1
-  priority: 0
-  blendDistance: 0
-  weight: 1
-  sharedProfile: {fileID: 11400000, guid: 89cd9d0182708d04397eedb36887e8c2, type: 2}
 --- !u!114 &-9176754429654356131
 MonoBehaviour:
   m_ObjectHideFlags: 0
