@@ -13,9 +13,12 @@ public class Disparo : MonoBehaviour
     public float SpeedOfChangeVelocity;
     public float SpeedOfChangeAngle;
 
+    private GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
         colliderController = FindObjectOfType<ColliderController>();
     }
 
@@ -29,13 +32,15 @@ public class Disparo : MonoBehaviour
                 colliderController.Circles.Add(pro.GetComponent<CircleColliderSim>());
                 pro.Vo = Vo;
                 pro.Angulo = (((Angulo + transform.eulerAngles.z) * Mathf.PI) / 180);
-
-                if (this.tag == "Player1"){
-                    pro.tag = "ProjectPla1";
-                } else {
-                    pro.tag = "ProjectPla2";
+                if (gameObject.tag == "Player1")
+                {
+                    gameManager.ChangeTurn(1);
+                }
+                else {
+                    gameManager.ChangeTurn(0);
                 }
             }
+
         }
         if (Input.GetKey(KeyCode.E))
         {

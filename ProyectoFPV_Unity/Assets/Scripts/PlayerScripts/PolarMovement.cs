@@ -10,10 +10,14 @@ public class PolarMovement : MonoBehaviour
 
     //Este representa la posicion en valores polares
     private Vector2 pos;
+    private GameManager gameManager;
 
-    void Start()
+    void Awake()
     {
+        gameManager = FindObjectOfType<GameManager>();
         pos = transform.position;
+        GeneralPolarMovement();
+        
     }
 
     void Update()
@@ -32,7 +36,6 @@ public class PolarMovement : MonoBehaviour
         //Ademas para poder moverme "Verticalmente" respecto del centro
         //Tengo que aumentar el valor del radio, en este caso sera el valor representado por "x" dentro del vector
         pos.y += Time.deltaTime * (speed) * Input.GetAxis("Horizontal");
-        //pos.x += Time.deltaTime * (speed) * Input.GetAxis("Vertical");
         pos.x = altura;
 
         //Despues de aumentar dicho angulo aplico la funcion de coordenadas polares
@@ -43,10 +46,12 @@ public class PolarMovement : MonoBehaviour
     {
         if(coll.tag == "ProjectPla2" && this.tag == "Player1")
         {
+            gameManager.Win();
             Destroy(this.gameObject);
         }
         else if(coll.tag == "ProjectPla1" && this.tag == "Player2")
         {
+            gameManager.Win();
             Destroy(this.gameObject);
         }
     }
