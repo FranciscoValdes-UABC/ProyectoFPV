@@ -209,10 +209,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   camposGravitatorios: []
+  maxTime: 5
   Vo: 0
   Angulo: 0
   g: 0
   peso: 0
+  ImpactExplosion:
+  - {fileID: 1616049528385904123, guid: 115a9a13e78d51c4a80c7fbde43a1b41, type: 3}
+  - {fileID: 6435736760913158103, guid: e550faf1e46b7c948b71f7d6bb51aa6c, type: 3}
+  - {fileID: 5645402462935023502, guid: 22f2a2c5e2935da409d9e033a0d498bd, type: 3}
 --- !u!114 &-9176754429654356131
 MonoBehaviour:
   m_ObjectHideFlags: 0

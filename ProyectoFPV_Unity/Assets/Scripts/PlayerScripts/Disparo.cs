@@ -13,12 +13,16 @@ public class Disparo : MonoBehaviour
     public float SpeedOfChangeVelocity;
     public float SpeedOfChangeAngle;
 
+    private Animator animator;
     private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
+        animator = GetComponentInChildren<Animator>();
+        flechaDireccion.transform.localScale = new Vector3(Vo / 10, 2, 2);
+
         colliderController = FindObjectOfType<ColliderController>();
     }
 
@@ -28,28 +32,25 @@ public class Disparo : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             if(Vo != 0){
+                animator.SetTrigger("Shoot");
                 ProjectileMovement1 pro = Instantiate(projectile, transform.position, transform.rotation) as ProjectileMovement1;
                 colliderController.Circles.Add(pro.GetComponent<CircleColliderSim>());
                 pro.Vo = Vo;
                 pro.Angulo = (((Angulo + transform.eulerAngles.z) * Mathf.PI) / 180);
-                if (gameObject.tag == "Player1")
-                {
-                    gameManager.ChangeTurn(1);
-                }
-                else {
-                    gameManager.ChangeTurn(0);
-                }
+
+                gameManager.DisableMovement();
+                
             }
 
         }
         if (Input.GetKey(KeyCode.E))
         {
-            Vo = Vo + SpeedOfChangeVelocity * Time.deltaTime;
-            flechaDireccion.transform.localScale = new Vector3(Vo/50, 0.2f, 0.2f);
+            Vo = Mathf.Clamp(Vo + SpeedOfChangeVelocity * Time.deltaTime, 0, 25);
+            flechaDireccion.transform.localScale = new Vector3(Vo/10,2, 2);
         } else if (Input.GetKey(KeyCode.Q))
         {
-            Vo = Vo - SpeedOfChangeVelocity * Time.deltaTime;
-            flechaDireccion.transform.localScale = new Vector3(Vo/50, 0.2f, 0.2f);
+            Vo = Mathf.Clamp(Vo - SpeedOfChangeVelocity * Time.deltaTime, 10, 25);
+            flechaDireccion.transform.localScale = new Vector3(Vo/10, 2, 2);
         }
         if (Input.GetAxisRaw("Vertical") != 0)
         {
