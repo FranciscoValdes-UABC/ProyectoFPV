@@ -8,8 +8,7 @@ public class GameManager : MonoBehaviour
     //Jugador 1 = 0
     //Jugador 2 = 1
     public GameObject[] Jugadores;
-    public GameObject Fondo;
-    public Sprite[] Fondos;
+    public GameObject[] Fondos;
 
     void Start()
     {
@@ -26,7 +25,8 @@ public class GameManager : MonoBehaviour
 
     public void ChangeTurn(int jA)
     {
-        Fondo.GetComponent<SpriteRenderer>().sprite = Fondos[jA];
+        StartCoroutine("changeBackground", jA);
+ 
         for (int i = 0; i < Jugadores.Length; i++) {
             if (i == jA)
             {
@@ -39,6 +39,20 @@ public class GameManager : MonoBehaviour
                 Jugadores[i].GetComponent<PolarMovement>().enabled = false;
             }
         }
+    }
+
+    IEnumerator changeBackground(int a) {
+        
+        for (float k = 0; k <= 1; k += 0.01f){
+            Fondos[a].GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, k);
+            yield return null;
+        }
+        for (float j = 1; j >= 0; j -= 0.01f){
+            Fondos[Mathf.Abs(a-1)].GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, j);
+            yield return null;
+        }
+            
+        
     }
 
     public void Win() {

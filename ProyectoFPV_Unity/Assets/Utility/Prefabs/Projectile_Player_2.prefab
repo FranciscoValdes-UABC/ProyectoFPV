@@ -209,7 +209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   camposGravitatorios: []
-  maxTime: 5
+  maxTime: 3
   Vo: 0
   Angulo: 0
   g: 0
