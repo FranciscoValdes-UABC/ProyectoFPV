@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ColliderController : MonoBehaviour
 {
-    public List<GameObject> objects;
     public List<BoxColliderSim> Boxes;
     public List<CircleColliderSim> Circles;
 
@@ -16,20 +16,8 @@ public class ColliderController : MonoBehaviour
 
     void Start()
     {
-       
-        foreach (GameObject i in objects)
-        {
-            BoxColliderSim box = i.GetComponent<BoxColliderSim>();
-            CircleColliderSim circle = i.GetComponent<CircleColliderSim>();
-            if (box != null)
-            {
-                Boxes.Add(box);
-            }
-            if (circle != null)
-            {
-                Circles.Add(circle);
-            }
-        }
+        Boxes = FindObjectsOfType<BoxColliderSim>().ToList();
+        Circles = FindObjectsOfType<CircleColliderSim>().ToList();
     }
 
     void Update()

@@ -27,19 +27,15 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine("changeBackground", jA);
  
-        for (int i = 0; i < Jugadores.Length; i++) {
-            if (i == jA)
-            {
-                Jugadores[i].GetComponent<Disparo>().enabled = true;
-                Jugadores[i].GetComponent<PolarMovement>().enabled = true;
-                continue;
-            }
-            else {
-                Jugadores[i].GetComponent<Disparo>().enabled = false;
-                Jugadores[i].GetComponent<PolarMovement>().enabled = false;
-            }
-        }
+
+        Jugadores[jA].GetComponent<Disparo>().enabled = true;
+        Jugadores[jA].GetComponent<PolarMovement>().enabled = true;
+
+        Jugadores[Mathf.Abs(jA - 1)].GetComponent<Disparo>().enabled = false;
+        Jugadores[Mathf.Abs(jA - 1)].GetComponent<PolarMovement>().enabled = false;
+            
     }
+    
 
     IEnumerator changeBackground(int a) {
         

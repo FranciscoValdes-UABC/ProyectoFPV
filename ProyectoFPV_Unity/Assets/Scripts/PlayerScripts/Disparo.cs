@@ -45,11 +45,11 @@ public class Disparo : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.E))
         {
-            Vo = Mathf.Clamp(Vo + SpeedOfChangeVelocity * Time.deltaTime, 0, 25);
+            Vo = Mathf.Clamp(Vo + SpeedOfChangeVelocity * Time.deltaTime, 0, 30);
             flechaDireccion.transform.localScale = new Vector3(Vo/10,2, 2);
         } else if (Input.GetKey(KeyCode.Q))
         {
-            Vo = Mathf.Clamp(Vo - SpeedOfChangeVelocity * Time.deltaTime, 10, 25);
+            Vo = Mathf.Clamp(Vo - SpeedOfChangeVelocity * Time.deltaTime, 10, 30);
             flechaDireccion.transform.localScale = new Vector3(Vo/10, 2, 2);
         }
         if (Input.GetAxisRaw("Vertical") != 0)
