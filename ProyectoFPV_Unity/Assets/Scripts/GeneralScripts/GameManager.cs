@@ -8,15 +8,25 @@ public class GameManager : MonoBehaviour
     //Jugador 1 = 0
     //Jugador 2 = 1
     public GameObject[] Jugadores;
+    public GameObject Fondo;
+    public Sprite[] Fondos;
 
     void Start()
     {
         ChangeTurn(0);
     }
 
-    
+    public void DisableMovement()
+    {
+        Jugadores[0].GetComponent<Disparo>().enabled = false;
+        Jugadores[0].GetComponent<PolarMovement>().enabled = false;
+        Jugadores[1].GetComponent<Disparo>().enabled = false;
+        Jugadores[1].GetComponent<PolarMovement>().enabled = false;
+    }
+
     public void ChangeTurn(int jA)
     {
+        Fondo.GetComponent<SpriteRenderer>().sprite = Fondos[jA];
         for (int i = 0; i < Jugadores.Length; i++) {
             if (i == jA)
             {
