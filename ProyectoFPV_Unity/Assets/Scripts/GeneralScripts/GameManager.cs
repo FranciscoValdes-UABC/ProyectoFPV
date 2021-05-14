@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,9 +10,13 @@ public class GameManager : MonoBehaviour
     //Jugador 2 = 1
     public GameObject[] Jugadores;
     public GameObject[] Fondos;
+    public GameObject menuGanar;
+    public TMPro.TextMeshProUGUI textGanar;
+    private MenuPrincipal menuPrincipal;
 
     void Start()
     {
+        menuPrincipal = FindObjectOfType<MenuPrincipal>();
         ChangeTurn(0);
     }
 
@@ -51,7 +56,9 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public void Win() {
+    public void Win(int a) {
+        textGanar.text = "Ganaste jugador " + (a);
+        menuPrincipal.Mostrar(menuGanar);
         print("Ya gano un master");
     }
 }

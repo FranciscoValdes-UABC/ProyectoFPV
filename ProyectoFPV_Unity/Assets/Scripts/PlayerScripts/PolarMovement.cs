@@ -65,12 +65,12 @@ public class PolarMovement : MonoBehaviour
     {
         if(coll.tag == "ProjectPla2" && this.tag == "Player1")
         {
-            gameManager.Win();
+            gameManager.Win(2);
             Destroy(this.gameObject);
         }
         else if(coll.tag == "ProjectPla1" && this.tag == "Player2")
         {
-            gameManager.Win();
+            gameManager.Win(1);
             Destroy(this.gameObject);
         }
     }

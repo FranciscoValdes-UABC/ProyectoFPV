@@ -16,6 +16,8 @@ public class Disparo : MonoBehaviour
     private Animator animator;
     private GameManager gameManager;
 
+    public bool m_isAxisInUse = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,19 +31,31 @@ public class Disparo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+
+        if (Input.GetAxis("Fire1") != 0)
         {
-            if(Vo != 0){
-                animator.SetTrigger("Shoot");
-                ProjectileMovement1 pro = Instantiate(projectile, transform.position, transform.rotation) as ProjectileMovement1;
-                colliderController.Circles.Add(pro.GetComponent<CircleColliderSim>());
-                pro.Vo = Vo;
-                pro.Angulo = (((Angulo + transform.eulerAngles.z) * Mathf.PI) / 180);
+            if (m_isAxisInUse == false)
+            {
+                if (Vo != 0)
+                {
+                    animator.SetTrigger("Shoot");
+                    ProjectileMovement1 pro = Instantiate(projectile, transform.position, transform.rotation) as ProjectileMovement1;
+                    colliderController.Circles.Add(pro.GetComponent<CircleColliderSim>());
+                    pro.Vo = Vo;
+                    pro.Angulo = (((Angulo + transform.eulerAngles.z) * Mathf.PI) / 180);
 
-                gameManager.DisableMovement();
-                
+                    gameManager.DisableMovement();
+
+                }
+                m_isAxisInUse = true;
             }
+            
+            
 
+        }
+        if (Input.GetAxisRaw("Fire1") == 0)
+        {
+            m_isAxisInUse = false;
         }
         if (Input.GetKey(KeyCode.E))
         {
