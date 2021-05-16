@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class ColliderController : MonoBehaviour
 {
+    public AudioSource colision_sound;
+
     public List<BoxColliderSim> Boxes;
     public List<CircleColliderSim> Circles;
 
@@ -58,6 +60,7 @@ public class ColliderController : MonoBehaviour
                 if ((Dx * Dx + Dy * Dy) <= j.size * j.size)
                 {
                     print("Colision!");
+                    colision_sound.Play();
                     //Esta funcion busca, en todos los scripts que hereden de MonoBehaviour dentro de el objeto, una funcion con el
                     //nombre "OnCollision" le manda como argumento el objeto con el que colisiono y el ultimo argumento indica que no
                     //importa si no encuentra ninguna funcion con ese nombre
@@ -81,6 +84,7 @@ public class ColliderController : MonoBehaviour
                 if (D <= j.size + i.size)
                 {
                     print("Circle Colision!");
+                    colision_sound.Play();
                     //Esta funcion busca, en todos los scripts que hereden de MonoBehaviour dentro de el objeto, una funcion con el
                     //nombre "OnCollision" le manda como argumento el objeto con el que colisiono y el ultimo argumento indica que no
                     //importa si no encuentra ninguna funcion con ese nombre

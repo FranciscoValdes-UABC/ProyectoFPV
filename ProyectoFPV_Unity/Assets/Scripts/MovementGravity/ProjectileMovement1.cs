@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ProjectileMovement1 : MonoBehaviour
 {
     public float speed;
     public CampoGravitatorio[] camposGravitatorios;
+    public TextMeshProUGUI posicion_txt;
+    public TextMeshProUGUI velocidad_txt;
+    public TextMeshProUGUI aceleracion_txt;
 
     //Tiempo maximo
     public float maxTime;
@@ -42,6 +46,10 @@ public class ProjectileMovement1 : MonoBehaviour
 
         //Lista en donde se encuentran todos los planetas
         camposGravitatorios = FindObjectsOfType<CampoGravitatorio>();
+
+        posicion_txt.text = "Posicion = " + P;
+        velocidad_txt.text = "Velocidad = " + V;
+        aceleracion_txt.text = "Aceleracion = " + A;
     }
 
     void Update()
@@ -70,6 +78,7 @@ public class ProjectileMovement1 : MonoBehaviour
             P = transform.position;
             dentro = 0;
             g = 0;
+            A = new Vector2(0, 0);
         }
 
 
@@ -79,6 +88,10 @@ public class ProjectileMovement1 : MonoBehaviour
             P.y = P.y + V.y * Time.deltaTime;
             transform.position = P;
         }
+
+        posicion_txt.text = "Posicion = (" + transform.position.x.ToString("f1") + ", " + transform.position.y.ToString("f1") + ")";
+        velocidad_txt.text = "Velocidad = " + V;
+        aceleracion_txt.text = "Aceleracion = " + A;
     }
     void CambiarTurno() {
         if (gameObject.tag == "ProjectPla1")
@@ -103,7 +116,6 @@ public class ProjectileMovement1 : MonoBehaviour
 
     public void OnCollision(GameObject coll)
     {
-
         CambiarTurno();
         Destroy(this.gameObject);
         GameObject Explosion;
@@ -118,6 +130,5 @@ public class ProjectileMovement1 : MonoBehaviour
         }
         GameObject exp = Instantiate(Explosion, posImp, transform.rotation) as GameObject;
         exp.transform.up = transform.position - center.position;
-
     }
 }

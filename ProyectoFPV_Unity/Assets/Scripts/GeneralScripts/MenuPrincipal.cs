@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class MenuPrincipal : MonoBehaviour
 {
     public AudioSource Ambiente;
+    public AudioMixer audioMixer;
 
+    float volumen;
 
     void Start()
     {
@@ -43,8 +46,13 @@ public class MenuPrincipal : MonoBehaviour
 
     public void Volumen(float volumen)
     {
-        Ambiente.volume = volumen;
+        audioMixer.SetFloat("volumenMusica", volumen);
     }
 
-   
+    public void VolumenEfectos(float volumenEf)
+    {
+        audioMixer.SetFloat("volumenEfectos", volumenEf);
+    }
+
+
 }

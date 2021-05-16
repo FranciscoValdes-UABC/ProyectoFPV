@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Disparo : MonoBehaviour
 {
@@ -9,6 +10,10 @@ public class Disparo : MonoBehaviour
     public float Vo;
     public float Angulo;
     private ColliderController colliderController;
+
+    public TextMeshProUGUI posicion_txt;
+    public TextMeshProUGUI velocidad_txt;
+    public TextMeshProUGUI aceleracion_txt;
 
     public float SpeedOfChangeVelocity;
     public float SpeedOfChangeAngle;
@@ -43,6 +48,9 @@ public class Disparo : MonoBehaviour
                     colliderController.Circles.Add(pro.GetComponent<CircleColliderSim>());
                     pro.Vo = Vo;
                     pro.Angulo = (((Angulo + transform.eulerAngles.z) * Mathf.PI) / 180);
+                    pro.posicion_txt = posicion_txt;
+                    pro.velocidad_txt = velocidad_txt;
+                    pro.aceleracion_txt = aceleracion_txt;
 
                     gameManager.DisableMovement();
 

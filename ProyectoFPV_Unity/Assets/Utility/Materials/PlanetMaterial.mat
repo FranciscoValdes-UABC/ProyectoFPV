@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: PlanetMaterial
   m_Shader: {fileID: -6465566751694194690, guid: bae782aa1a912ce48882bbd8ac6745eb, type: 3}
-  m_ShaderKeywords: 
+  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -21,6 +21,10 @@ Material:
     m_TexEnvs:
     - Texture2D_1cccb66657a04f9383dfc9bcebc93dd8:
         m_Texture: {fileID: 2800000, guid: 1bc9ac0c3e11be749b75b2b23bf7b04a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_76502a66844f42c68deb94514911c154:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_954ad82083a64c6098a9af7ed45d14f7:
