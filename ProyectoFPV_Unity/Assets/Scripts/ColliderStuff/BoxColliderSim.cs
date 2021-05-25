@@ -17,6 +17,9 @@ public class BoxColliderSim : MonoBehaviour
         sizes[1] = this.transform.localScale.y;
     }
 
+    //Esta funcion dibuja el collider en la pantalla, debido a que el objeto sobre el cual este collider estara puede rotar se 
+    //genera una matriz de Posicion, Rotacion y Escala basandonos en el objeto original, esta se impone en el dibujo para obtener
+    //la posicion y rotacion correspondiente.
     void OnDrawGizmosSelected()
     {
         Matrix4x4 rotationMatrix = Matrix4x4.TRS(transform.position, transform.rotation, transform.lossyScale);

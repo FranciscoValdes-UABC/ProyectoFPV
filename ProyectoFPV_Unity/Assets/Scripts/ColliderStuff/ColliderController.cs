@@ -7,29 +7,33 @@ public class ColliderController : MonoBehaviour
 {
     public AudioSource colision_sound;
 
+    //Estas listas contienen todos los colliders que estan dentro del juego
+    //se requieren listas diferentes para los colliders que tienen forma de cuadrada y circular
     public List<BoxColliderSim> Boxes;
     public List<CircleColliderSim> Circles;
 
     //Se ignoraran las colisiones que ocurran entre los objetos que tengan las tags contenidas en estas listas
     //El sistema funciona como pares, los tags que tengan el mismo indice en las listas se excluiran entre ellos
-    //Para esto las listas siempre tendran que ser del mismo tamaño
+    //Para esto las listas siempre tendran que ser del mismo tamaño.
     public List<string> TagsToExcludeP1;
     public List<string> TagsToExcludeP2;
 
-    void Start()
-    {
+    //Esta funcion ocurre en el comienzo del juego
+    void Start(){
+        //En este par de lineas se obtienen todos los objetos y se añaden a sus respectivas listas.
         Boxes = FindObjectsOfType<BoxColliderSim>().ToList();
         Circles = FindObjectsOfType<CircleColliderSim>().ToList();
     }
 
     void Update()
     {
+        //El siguiente par de lineas elimina todos los objetos que son nulos de las listas
+        //esto puede ocurrir debido a que los proyectiles son eliminados en el momento de impacto.
         Circles.RemoveAll(item => item == null);
         Boxes.RemoveAll(item => item == null);
-        //Esto revisa si existen colisiones entre circulos y rectangulos
-        foreach ( CircleColliderSim j in Circles)
-        {
 
+        //El siguiente par de fors anidadosrevisa si existen colisiones entre circulos y rectangulos
+        foreach ( CircleColliderSim j in Circles){
             foreach (BoxColliderSim i in Boxes){
 
                 //Esto sirve para excluir las colisiones de los objetos que contengan los tags definidos anteriormente
@@ -42,10 +46,9 @@ public class ColliderController : MonoBehaviour
                         excluir = true;
                     }
                 }
- 
                 if (excluir) { continue; }
 
-                //Como el cuadrado puede rotar tal vez sea mejor tomar las coordenadas del cuadrado como las del origen
+                //Como el cuadrado puede rotar es mejor tomar las coordenadas del cuadrado como las del origen
                 Vector2 C = i.transform.InverseTransformPoint(new Vector3(j.transform.position.x, j.transform.position.y));
 
                 //Encuentra los valores de el punto mas cercano del cuadrado al circulo.
@@ -70,17 +73,21 @@ public class ColliderController : MonoBehaviour
             }
 
             //Detecta colision entre circulos
-            foreach (CircleColliderSim i in Circles)
-            {
+            foreach (CircleColliderSim i in Circles) {
+
+                //Debido a que en este caso estamos iterando sobre la misma lista que el for exterior debemos de tomar en cuenta el caso en el que 
+                //se este comparando un circulo sobre si mismo.
+                if (i == j)
+                {
+                    continue;
+                }
+
+                //Esto encuentra la distancia entre ambos circulos.
                 float Dx = j.transform.position.x - i.transform.position.x;
                 float Dy = j.transform.position.y - i.transform.position.y;
                 float D = Mathf.Sqrt(Dx * Dx + Dy * Dy);
 
-                if (i == j) {
-                    continue;
-                }
-
-                //Si la distancia entre los centros de los circulos es mayor al radio de cualquiera de los dos entonces existe una colision
+                //Si la distancia entre los centros de los circulos es mayor la suma de el radio de los circulos entonces existe una colision
                 if (D <= j.size + i.size)
                 {
                     print("Circle Colision!");
