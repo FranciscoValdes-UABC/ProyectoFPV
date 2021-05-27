@@ -1,1 +1,5 @@
-UnityHUB
+UnityHUB: 2.4.3 o version más nueva
+Unity: 2020.3.4f1
+UniversalRenderPipeline: 10.4.0
+TextMeshPro: 3.0.6
+
